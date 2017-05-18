@@ -63,7 +63,7 @@ if($type == 'login')
     }
 }else if($type == 'getwork')
 {
-    $return_data = get_web_page($base_url.'backend/api/work/');
+    $return_data = get_web_page($base_url.'backend/api/work/?user_id='.$_SESSION['rad_user_id']);
     if($return_data['errno'] > 0)
     {
         $message = $return_data['errmsg'] ;

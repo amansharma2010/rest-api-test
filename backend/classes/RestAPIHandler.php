@@ -64,7 +64,9 @@ class RestAPIHandler extends CommonClass {
         $statusCode = 404;
         if($this->check_table_exit($table))
         {
-            $query = "SELECT * FROM ".$table.(($id > 0)?" WHERE (".$this->get_primary_key($table)." = ".$id.")":"");
+            if(isset($_GET['user_id'])){ $user_id = (int) $_GET['user_id'];}else{ $user_id = 0;} 
+            
+            $query = "SELECT * FROM ".$table." WHERE (1=1) ".(($id > 0)?" AND (".$this->get_primary_key($table)." = ".$id.")":"").(($user_id > 0)?" AND (user_id = ".$user_id.")":"");
             $result = $this->query($query);
             $rows = $this->num_rows($result);
             if($rows > 0)
